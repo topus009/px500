@@ -1,5 +1,5 @@
-const { prettierConfig } = require('poetic');
-
 module.exports = {
-  ...prettierConfig,
+  printWidth: 120,
+  singleQuote: true,
+  trailingComma: 'es5',
 };

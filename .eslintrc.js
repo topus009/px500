@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ["./node_modules/poetic/config/eslint/eslint-config.js"],
+  parser: 'babel-eslint', //FIXME: ЧТОБЫ НЕ РУГАЛОСЬ НА OPTIONAL-CHAINING,
+  extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
+  env: {
+    commonjs: true,
+    es6: true,
+    node: true,
+  },
   rules: {
     'jsx-a11y/href-no-hash': ['off'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
@@ -8,14 +14,13 @@ module.exports = {
     'max-len': [
       'warn',
       {
-        code: 100,
+        code: 120,
         tabWidth: 2,
-        comments: 100,
+        comments: 120,
         ignoreComments: false,
         ignoreTrailingComments: true,
         ignoreUrls: true,
         ignoreStrings: true,
-        ignoreTemplateLiterals: true,
         ignoreRegExpLiterals: true,
       },
     ],
@@ -25,10 +30,9 @@ module.exports = {
     'no-console': 0,
     'global-require': 0,
     'import/prefer-default-export': 0,
-  }
-  env: {
-    browser: false,
-    node: true,
-    jest: false,
+
+    // FIXME: ЧТОБЫ НЕ РУГАЛОСЬ НА OPTIONAL-CHAINING,
+    camelcase: 0,
+    'no-unused-expressions': 0,
   },
 };

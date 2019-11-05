@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, View, Text, ActivityIndicator, TouchableOpacity, Dimensions } from 'react-native';
+import { FlatList, Image, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Api from '../../api';
 import useStyles from './styles';
-import Pagination from '../../components/Pagination';
+import Pagination from '../../components/common/Pagination';
+import Loader from '../../components/common/Loader';
 
 const Gallery = ({ navigation }) => {
   const [layout, setLayout] = useState({});
@@ -50,7 +51,7 @@ const Gallery = ({ navigation }) => {
 
   return (
     <View style={styles.container} onLayout={onLayout}>
-      {fetching && <ActivityIndicator color="#fff" size="large" />}
+      {fetching && <Loader />}
       {photos.length ? (
         <FlatList
           contentContainerStyle={styles.list}

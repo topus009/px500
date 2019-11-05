@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../../styles/common';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#2f2f2f',
+    backgroundColor: colors.gray[100],
     height: 50,
     position: 'absolute',
     bottom: 0,
@@ -10,7 +11,7 @@ export default StyleSheet.create({
     paddingTop: 10,
   },
   page: {
-    color: 'white',
+    color: colors.white[100],
   },
   pageItem: {
     width: 30,
@@ -20,10 +21,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#494949',
+    borderColor: colors.gray[200],
     borderRadius: 15,
   },
   activePageItem: {
-    backgroundColor: '#494949',
+    backgroundColor: colors.gray[200],
   },
 });

@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { stringify } from 'query-string';
+import { baseURL } from '../config';
 
-const baseURL = 'https://api.500px.com/v1';
-
-export const req = axios.create();
+const req = axios.create();
 
 req.defaults.baseURL = baseURL;
 

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../styles/common';
 
 export default ({ width, height }) =>
   StyleSheet.create({
@@ -7,7 +8,7 @@ export default ({ width, height }) =>
       flex: 1,
       width,
       height,
-      backgroundColor: 'black',
+      backgroundColor: colors.black[100],
     },
     image: {
       justifyContent: 'center',

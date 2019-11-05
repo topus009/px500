@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { FlatList, Image, View, Text, TouchableOpacity } from 'react-native';
 import Api from '../../api';
 import useStyles from './styles';
 import Pagination from '../../components/common/Pagination';
 import Loader from '../../components/common/Loader';
+import { getKeyExtractor } from '../../helpers';
+import useWindowLayout from '../../hoc/useWindowLayout';
 
 const Gallery = ({ navigation }) => {
-  const [layout, setLayout] = useState({});
+  const [layout, setWindowLayout] = useWindowLayout();
   const [photos, setPhotos] = useState([]);
   const [fetching, setFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,23 +36,15 @@ const Gallery = ({ navigation }) => {
   };
 
   useEffect(() => {
-    console.clear();
-    const { width, height } = Dimensions.get('window');
-    const orientation = width > height ? 'landscape' : 'portrait';
     getPhotos();
-    setLayout({ width, height, orientation });
   }, []);
 
   const goToPhoto = source => navigation.navigate('Photo', { source });
 
-  const onLayout = () => {
-    const { width, height } = Dimensions.get('window');
-    const orientation = width > height ? 'landscape' : 'portrait';
-    setLayout({ width, height, orientation });
-  };
+  const numColumns = layout.orientation === 'portrait' ? 2 : 4;
 
   return (
-    <View style={styles.container} onLayout={onLayout}>
+    <View style={styles.container} onLayout={setWindowLayout}>
       {fetching && <Loader />}
       {photos.length ? (
         <FlatList
@@ -62,8 +56,8 @@ const Gallery = ({ navigation }) => {
               <Image style={styles.image} source={{ uri: item.image_url[0] }} />
             </TouchableOpacity>
           )}
-          numColumns={layout.orientation === 'portrait' ? 2 : 4}
-          keyExtractor={(item, index) => index.toString()}
+          numColumns={numColumns}
+          keyExtractor={getKeyExtractor}
         />
       ) : (
         !fetching && <Text>No photos</Text>
